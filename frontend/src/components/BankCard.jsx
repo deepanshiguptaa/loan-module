@@ -1,12 +1,15 @@
-/* eslint-disable react/prop-types */
-export default function BankCard({ name }) {
+export default function BankCard({ name, img, desc }) {
   return (
-    <div className="col-md-3 col-sm-6 mb-4">
-      <div className="card shadow-sm h-100">
-        <div className="card-body d-flex align-items-center justify-content-center">
-          <h5 className="card-title text-center">{name}</h5>
-        </div>
-      </div>
+    <div className="bg-white shadow rounded-lg p-4 flex flex-col items-center text-center hover:shadow-lg transition">
+      {img && (
+        <img
+          src={img}
+          alt={name}
+          className="h-20 object-contain mb-3"
+        />
+      )}
+      <h3 className="font-semibold text-lg">{name}</h3>
+      {desc && <p className="text-gray-500 text-sm mt-1">{desc}</p>}
     </div>
   );
 }

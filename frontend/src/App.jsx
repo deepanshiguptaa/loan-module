@@ -1,40 +1,17 @@
 import { useState } from "react";
 import CategorySection from "./components/CategorySection";
+import assets from "./assets/assets";
 
 function App() {
   const [search, setSearch] = useState("");
   const [country, setCountry] = useState("India");
 
-  // Country-wise data
-  const data = {
-    India: {
-      govtSchemes: ["Startup India", "Mudra Yojana", "Standup India"],
-      psuBanks: ["SBI", "PNB", "Canara Bank", "Bank of Baroda"],
-      privateBanks: ["HDFC", "ICICI", "Axis Bank", "Kotak Mahindra"],
-    },
-    USA: {
-      govtSchemes: ["SBA Loans", "PPP (Paycheck Protection Program)"],
-      psuBanks: ["Federal Reserve", "Bank of America (Govt-backed)"],
-      privateBanks: ["JP Morgan Chase", "Wells Fargo", "Citibank"],
-    },
-    UK: {
-      govtSchemes: ["Start Up Loans Scheme", "Enterprise Finance Guarantee"],
-      psuBanks: ["Bank of England", "NatWest (Govt-supported)"],
-      privateBanks: ["HSBC", "Barclays", "Lloyds"],
-    },
-    Canada: {
-      govtSchemes: ["Canada Small Business Financing Program", "BDC Loans"],
-      psuBanks: ["Bank of Canada"],
-      privateBanks: ["RBC", "TD Bank", "Scotiabank"],
-    },
-  };
+  const countryData = assets[country];
 
-  // Get data for selected country
-  const countryData = data[country];
-
-  // filter by search term
   const filterData = (list) =>
-    list.filter((item) => item.toLowerCase().includes(search.toLowerCase()));
+    list.filter((item) =>
+      item.name.toLowerCase().includes(search.toLowerCase())
+    );
 
   return (
     <div className="container my-4">
@@ -55,15 +32,15 @@ function App() {
             value={country}
             onChange={(e) => setCountry(e.target.value)}
           >
-            <option value="India">India</option>
-            <option value="USA">USA</option>
-            <option value="UK">UK</option>
-            <option value="Canada">Canada</option>
+            {Object.keys(assets).map((c) => (
+              <option key={c} value={c}>
+                {c}
+              </option>
+            ))}
           </select>
         </div>
       </div>
 
-      {/* Render only selected country's data */}
       {countryData && (
         <>
           <CategorySection
