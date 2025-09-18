@@ -1,19 +1,17 @@
 export default function SearchBar({ onSearch, onCountryChange }) {
   return (
-    <div className="flex flex-col md:flex-row items-center gap-4 p-4 bg-gray-100 rounded-xl shadow">
+    <div className="search-card" role="region" aria-label="Search and country selector">
       <input
+        className="search-input"
         type="text"
-        placeholder="Search loan scheme or bank..."
+        placeholder="Search schemes or banks..."
         onChange={(e) => onSearch(e.target.value)}
-        className="flex-1 p-2 border rounded-lg w-full"
       />
-      <select
-        onChange={(e) => onCountryChange(e.target.value)}
-        className="p-2 border rounded-lg w-full md:w-auto"
-      >
-        <option value="">Select Country</option>
-        <option value="india">India</option>
-        <option value="usa">USA</option>
+      <select className="country-select" onChange={(e) => onCountryChange(e.target.value)}>
+        <option value="India">India</option>
+        <option value="USA">USA</option>
+        <option value="UK">UK</option>
+        <option value="Canada">Canada</option>
       </select>
     </div>
   );
